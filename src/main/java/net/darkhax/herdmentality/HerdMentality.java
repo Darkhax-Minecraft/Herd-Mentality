@@ -6,10 +6,12 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.ITag.INamedTag;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -43,10 +45,21 @@ public class HerdMentality {
                 return;
             }
             
+            if (attacker instanceof FakePlayer) {
+                
+                return;
+            }
+            
+            if (attacker instanceof PlayerEntity && ((PlayerEntity) attacker).isCreative()) {
+                
+                return;
+            }
+            
             if (attacker instanceof LivingEntity) {
                 
                 for (final MobEntity nearby : EntityUtils.getEntitiesInArea(entity.getClass(), entity.world, entity.getPosition(), this.configuration.getRange())) {
                     
+                    System.out.println("notify");
                     nearby.setRevengeTarget((LivingEntity) attacker);
                 }
             }
