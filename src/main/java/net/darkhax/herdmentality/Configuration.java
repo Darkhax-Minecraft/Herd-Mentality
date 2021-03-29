@@ -37,7 +37,7 @@ public class Configuration {
         return this.ignoreNeutralMobs.get();
     }
     
-    public float getRange() {
+    public float getRange () {
         
         return this.range.get().floatValue();
     }
