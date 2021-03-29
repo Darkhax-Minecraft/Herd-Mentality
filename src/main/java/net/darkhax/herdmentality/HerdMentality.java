@@ -45,7 +45,7 @@ public class HerdMentality {
             
             if (attacker instanceof LivingEntity) {
                 
-                for (final MobEntity nearby : EntityUtils.getEntitiesInArea(entity.getClass(), entity.world, entity.getPosition(), 8f)) {
+                for (final MobEntity nearby : EntityUtils.getEntitiesInArea(entity.getClass(), entity.world, entity.getPosition(), this.configuration.getRange())) {
                     
                     nearby.setRevengeTarget((LivingEntity) attacker);
                 }

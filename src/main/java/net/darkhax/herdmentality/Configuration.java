@@ -2,12 +2,14 @@ package net.darkhax.herdmentality;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
+import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
 
 public class Configuration {
     
     private final ForgeConfigSpec spec;
     
     private final BooleanValue ignoreNeutralMobs;
+    private final DoubleValue range;
     
     public Configuration() {
         
@@ -20,6 +22,8 @@ public class Configuration {
         builder.comment("Should neutral mobs like pigs not be affected?");
         this.ignoreNeutralMobs = builder.define("ignoreNeutralMobs", false);
         
+        builder.comment("The range to notify other mobs.");
+        this.range = builder.defineInRange("range", 8d, 0d, 512d);
         this.spec = builder.build();
     }
     
@@ -31,5 +35,10 @@ public class Configuration {
     public boolean shouldIgnoreNeutralMobs () {
         
         return this.ignoreNeutralMobs.get();
+    }
+    
+    public float getRange() {
+        
+        return this.range.get().floatValue();
     }
 }
