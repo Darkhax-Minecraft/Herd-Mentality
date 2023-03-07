@@ -34,7 +34,7 @@ public class HerdMentality {
     
     private void onEntityDamaged (LivingDamageEvent event) {
 
-        if (event.getEntityLiving() instanceof Mob target && !target.getType().is(IGNORED_MOBS)) {
+        if (event.getEntity() instanceof Mob target && !target.getType().is(IGNORED_MOBS)) {
 
             final Entity attacker = event.getSource().getEntity();
             
