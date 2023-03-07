@@ -1,23 +1,37 @@
 modLoader="javafml"
-loaderVersion="[36,]"
-issueTrackerURL="https://github.com/Darkhax-Minecraft/herd-mentality/issues"
+loaderVersion="[40,]"
 license="LGPL v2.1"
 
 [[mods]]
 modId="herdmentality"
-updateJSONURL="https://updates.blamejared.com/get?n=herdmentality&gv=1.16.5"
-version="${version}"
-displayName="${mod_name}"
-displayURL="${mod_download}"
-credits="${mod_credits}"
-authors="${mod_authors}"
+updateJSONURL="https://updates.blamejared.com/get?n=herdmentality&gv=1.18.2"
+version="${file.jarVersion}"
+displayName="${modName}"
+displayURL="${modHomepage}"
+credits="${modCredits}"
+authors="${modAuthor}"
 description='''
-${mod_description}
+${modDescription}
 '''
-    
+itemIcon="minecraft:name_tag"
+
+[[dependencies.herdmentality]]
+    modId="forge"
+    mandatory=true
+    versionRange="[40,]"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.herdmentality]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18.2]"
+    ordering="NONE"
+    side="BOTH"
+
 [[dependencies.herdmentality]]
     modId="bookshelf"
     mandatory=true
-    versionRange="[10,)"
-    ordering="AFTER"
+    versionRange="[13,)"
+    ordering="NONE"
     side="BOTH"

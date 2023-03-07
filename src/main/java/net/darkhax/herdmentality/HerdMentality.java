@@ -1,15 +1,16 @@
 package net.darkhax.herdmentality;
 
-import net.darkhax.bookshelf.util.EntityUtils;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.tags.EntityTypeTags;
-import net.minecraft.tags.ITag.INamedTag;
-import net.minecraft.util.ResourceLocation;
+import net.darkhax.bookshelf.api.util.EntityHelper;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.animal.Pig;
+import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
@@ -23,7 +24,7 @@ public class HerdMentality {
     public static final String MOD_ID = "herdmentality";
     
     private final Configuration configuration = new Configuration();
-    private final INamedTag<EntityType<?>> IGNORED_MOBS = EntityTypeTags.createOptional(new ResourceLocation(HerdMentality.MOD_ID, "ignored_mobs"));
+    public final TagKey<EntityType<?>> IGNORED_MOBS = TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation(HerdMentality.MOD_ID, "ignored_mobs"));
     
     public HerdMentality() {
         
@@ -32,15 +33,12 @@ public class HerdMentality {
     }
     
     private void onEntityDamaged (LivingDamageEvent event) {
-        
-        final LivingEntity target = event.getEntityLiving();
-        
-        if (target instanceof MobEntity && !this.IGNORED_MOBS.contains(target.getType())) {
+
+        if (event.getEntityLiving() instanceof Mob target && !target.getType().is(IGNORED_MOBS)) {
+
+            final Entity attacker = event.getSource().getEntity();
             
-            final MobEntity entity = (MobEntity) event.getEntityLiving();
-            final Entity attacker = event.getSource().getTrueSource();
-            
-            if (this.configuration.shouldIgnoreNeutralMobs() && !(entity instanceof IMob)) {
+            if (this.configuration.shouldIgnoreNeutralMobs() && !(target instanceof Enemy)) {
                 
                 return;
             }
@@ -50,16 +48,18 @@ public class HerdMentality {
                 return;
             }
             
-            if (attacker instanceof PlayerEntity && ((PlayerEntity) attacker).isCreative()) {
+            if (attacker instanceof Player player && player.isCreative()) {
                 
                 return;
             }
             
-            if (attacker instanceof LivingEntity) {
-                
-                for (final MobEntity nearby : EntityUtils.getEntitiesInArea(entity.getClass(), entity.world, entity.getPosition(), this.configuration.getRange())) {
-                    
-                    nearby.setRevengeTarget((LivingEntity) attacker);
+            if (attacker instanceof LivingEntity livingAttacker) {
+
+                for (final Mob nearby : EntityHelper.getEntitiesInArea(target.getClass(), target.level, target.blockPosition(), this.configuration.getRange())) {
+
+                    if (!nearby.isAlliedTo(attacker)) {
+                        nearby.setLastHurtByMob(livingAttacker);
+                    }
                 }
             }
         }
