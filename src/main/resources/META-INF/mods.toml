@@ -1,10 +1,10 @@
 modLoader="javafml"
-loaderVersion="[43,]"
+loaderVersion="[45,]"
 license="LGPL v2.1"
 
 [[mods]]
 modId="herdmentality"
-updateJSONURL="https://updates.blamejared.com/get?n=herdmentality&gv=1.19.2"
+updateJSONURL="https://updates.blamejared.com/get?n=herdmentality&gv=1.19.4"
 version="${file.jarVersion}"
 displayName="${modName}"
 displayURL="${modHomepage}"
@@ -18,20 +18,20 @@ itemIcon="minecraft:name_tag"
 [[dependencies.herdmentality]]
     modId="forge"
     mandatory=true
-    versionRange="[43,]"
+    versionRange="[45,]"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.herdmentality]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.19.2]"
+    versionRange="[1.19.4]"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.herdmentality]]
     modId="bookshelf"
     mandatory=true
-    versionRange="[16,)"
+    versionRange="[18,)"
     ordering="NONE"
     side="BOTH"

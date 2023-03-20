@@ -9,7 +9,7 @@ public class Configuration {
     private final ForgeConfigSpec spec;
     
     private final BooleanValue ignoreNeutralMobs;
-    private final DoubleValue range;
+    private final ForgeConfigSpec.IntValue range;
     
     public Configuration() {
         
@@ -23,7 +23,7 @@ public class Configuration {
         this.ignoreNeutralMobs = builder.define("ignoreNeutralMobs", false);
         
         builder.comment("The range to notify other mobs.");
-        this.range = builder.defineInRange("range", 8d, 0d, 512d);
+        this.range = builder.defineInRange("range", 8, 0, 512);
         this.spec = builder.build();
     }
     
@@ -37,8 +37,8 @@ public class Configuration {
         return this.ignoreNeutralMobs.get();
     }
     
-    public float getRange () {
+    public int getRange () {
         
-        return this.range.get().floatValue();
+        return this.range.get().intValue();
     }
 }

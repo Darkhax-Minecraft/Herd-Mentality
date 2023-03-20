@@ -2,6 +2,7 @@ package net.darkhax.herdmentality;
 
 import net.darkhax.bookshelf.api.util.EntityHelper;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
@@ -24,7 +25,7 @@ public class HerdMentality {
     public static final String MOD_ID = "herdmentality";
     
     private final Configuration configuration = new Configuration();
-    public final TagKey<EntityType<?>> IGNORED_MOBS = TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation(HerdMentality.MOD_ID, "ignored_mobs"));
+    public final TagKey<EntityType<?>> IGNORED_MOBS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(HerdMentality.MOD_ID, "ignored_mobs"));
     
     public HerdMentality() {
         
