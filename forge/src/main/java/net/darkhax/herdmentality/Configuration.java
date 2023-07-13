@@ -1,10 +1,11 @@
 package net.darkhax.herdmentality;
 
+import net.darkhax.herdmentality.config.IConfig;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
 import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
 
-public class Configuration {
+public class Configuration implements IConfig {
     
     private final ForgeConfigSpec spec;
     
@@ -31,12 +32,14 @@ public class Configuration {
         
         return this.spec;
     }
-    
+
+    @Override
     public boolean shouldIgnoreNeutralMobs () {
         
         return this.ignoreNeutralMobs.get();
     }
-    
+
+    @Override
     public int getRange () {
         
         return this.range.get().intValue();

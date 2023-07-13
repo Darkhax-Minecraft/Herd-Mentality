@@ -19,13 +19,11 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig.Type;
 
-@Mod(HerdMentality.MOD_ID)
+@Mod(Constants.MOD_ID)
 public class HerdMentality {
     
-    public static final String MOD_ID = "herdmentality";
-    
     private final Configuration configuration = new Configuration();
-    public final TagKey<EntityType<?>> IGNORED_MOBS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(HerdMentality.MOD_ID, "ignored_mobs"));
+    public final TagKey<EntityType<?>> IGNORED_MOBS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Constants.MOD_ID, "ignored_mobs"));
     
     public HerdMentality() {
         
@@ -56,7 +54,7 @@ public class HerdMentality {
             
             if (attacker instanceof LivingEntity livingAttacker) {
 
-                for (final Mob nearby : EntityHelper.getEntitiesInArea(target.getClass(), target.level, target.blockPosition(), this.configuration.getRange())) {
+                for (final Mob nearby : EntityHelper.getEntitiesInArea(target.getClass(), target.level(), target.blockPosition(), this.configuration.getRange())) {
 
                     if (!nearby.isAlliedTo(attacker)) {
                         nearby.setLastHurtByMob(livingAttacker);
