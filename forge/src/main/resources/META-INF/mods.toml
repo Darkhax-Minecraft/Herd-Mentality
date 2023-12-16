@@ -15,3 +15,9 @@ authors = "${mod_author}"
 description = '''
 ${mod_description}
 '''
+[[dependencies.herdmentality]]
+modId = "bookshelf" #mandatory
+mandatory = true #mandatory
+versionRange = "[20.0.1,)" #mandatory
+ordering = "NONE" # The order that this dependency should load in relation to your mod, required to be either 'BEFORE' or 'AFTER' if the dependency is not mandatory
+side = "SERVER" # Side this dependency is applied on - 'BOTH', 'CLIENT' or 'SERVER'
