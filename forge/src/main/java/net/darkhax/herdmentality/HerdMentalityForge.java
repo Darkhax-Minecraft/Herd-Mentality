@@ -40,7 +40,7 @@ public class HerdMentalityForge {
             if (attacker instanceof Player player && player.isCreative()) {
                 return;
             }
-            if (attacker instanceof LivingEntity livingAttacker) {
+            if (attacker instanceof LivingEntity livingAttacker && !target.isAlliedTo(attacker)) {
                 for (final Mob nearby : EntityHelper.getEntitiesInArea(target.getClass(), target.level(), target.blockPosition(), this.configuration.getRange())) {
                     if (!nearby.isAlliedTo(attacker)) {
                         nearby.setLastHurtByMob(livingAttacker);
