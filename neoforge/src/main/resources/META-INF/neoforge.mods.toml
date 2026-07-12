@@ -1,0 +1,43 @@
+modLoader = "javafml"
+license = "LGPL V2.1"
+issueTrackerURL = "https://github.com/Darkhax-Minecraft/herd-mentality/issues"
+
+[[mods]]
+modId = "herdmentality"
+version = "26.1.2.0"
+displayName = "HerdMentality"
+updateJSONURL = "https://updates.blamejared.com/get?n=herdmentality&gv=26.1.2&ml=neoforge"
+displayURL = "https://www.curseforge.com/minecraft/mc-mods/herd-mentality"
+logoFile = "logo_herdmentality.png"
+logoBlur = false
+credits = "This project is made possible with Patreon support from players like you. Thank you! lothrazar, techsquirrel, Tobias Ward, noobanidus"
+authors = "Darkhax"
+description = "A framework for creating custom progression systems."
+
+[[mixins]]
+config = "herdmentality.common.mixins.json"
+
+[[mixins]]
+config = "herdmentality.neoforge.mixins.json"
+
+[[dependencies.herdmentality]]
+modId = "minecraft"
+type = "required"
+versionRange = "26.1"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.herdmentality]]
+modId = "neoforge"
+type = "required"
+versionRange = "[26.1.0.1-beta,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.herdmentality]]
+modId = "prickle"
+type = "required"
+versionRange = "[0,)"
+ordering = "NONE"
+side = "BOTH"
+
